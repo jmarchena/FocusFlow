@@ -64,6 +64,8 @@ struct StatsView: View {
             RoundedRectangle(cornerRadius: 12)
                 .fill(.ultraThinMaterial)
         )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title): \(value)")
     }
 
     // MARK: - Weekly Chart
@@ -106,6 +108,9 @@ struct StatsView: View {
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
                         }
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(shortDayName(for: day))
+                        .accessibilityValue(minutes > 0 ? "\(minutes) minutes focused" : "No focus sessions")
                     }
                 }
                 .frame(height: 140)
@@ -166,6 +171,13 @@ struct StatsView: View {
             }
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(sessionRowAccessibilityLabel(for: session))
+    }
+
+    private func sessionRowAccessibilityLabel(for session: FocusSession) -> String {
+        let status = session.wasCompleted ? "Completed" : "Incomplete"
+        return "\(status) session, \(session.formattedDuration), started \(session.startDate.formatted(.relative(presentation: .named)))"
     }
 
     // MARK: - Helpers

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TimerView: View {
     @Bindable var viewModel: TimerViewModel
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         NavigationStack {
@@ -35,6 +36,8 @@ struct TimerView: View {
             Capsule()
                 .fill(colorForPhase.opacity(0.12))
         )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Current phase: \(viewModel.phaseLabel)")
     }
 
     // MARK: - Timer Ring
@@ -56,14 +59,14 @@ struct TimerView: View {
                     style: StrokeStyle(lineWidth: 12, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeInOut(duration: 0.3), value: viewModel.progress)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: viewModel.progress)
 
             // Time display
             VStack(spacing: 4) {
                 Text(viewModel.formattedTime)
                     .font(.system(size: 56, weight: .light, design: .monospaced))
                     .contentTransition(.numericText())
-                    .animation(.linear(duration: 0.1), value: viewModel.remainingSeconds)
+                    .animation(reduceMotion ? nil : .linear(duration: 0.1), value: viewModel.remainingSeconds)
 
                 if viewModel.currentPhase == .focus {
                     Text("Session \(viewModel.completedFocusSessions + 1) of \(viewModel.configuration.sessionsBeforeLongBreak)")
@@ -73,6 +76,28 @@ struct TimerView: View {
             }
         }
         .frame(width: 260, height: 260)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(timerRingAccessibilityLabel)
+        .accessibilityValue(timerRingAccessibilityValue)
+    }
+
+    private var timerRingAccessibilityLabel: String {
+        "\(viewModel.phaseLabel) timer"
+    }
+
+    private var timerRingAccessibilityValue: String {
+        let minutes = viewModel.remainingSeconds / 60
+        let seconds = viewModel.remainingSeconds % 60
+        let timeText: String
+        if minutes > 0 && seconds > 0 {
+            timeText = "\(minutes) minutes \(seconds) seconds remaining"
+        } else if minutes > 0 {
+            timeText = "\(minutes) minutes remaining"
+        } else {
+            timeText = "\(seconds) seconds remaining"
+        }
+        guard viewModel.currentPhase == .focus else { return timeText }
+        return "Session \(viewModel.completedFocusSessions + 1) of \(viewModel.configuration.sessionsBeforeLongBreak). \(timeText)"
     }
 
     // MARK: - Control Buttons
@@ -92,6 +117,8 @@ struct TimerView: View {
                     )
             }
             .foregroundStyle(.secondary)
+            .accessibilityLabel("Reset timer")
+            .accessibilityHint("Resets the current phase to its full duration")
 
             // Play/Pause button
             Button {
@@ -111,6 +138,10 @@ struct TimerView: View {
                     )
                     .shadow(color: colorForPhase.opacity(0.3), radius: 8, y: 4)
             }
+            .accessibilityLabel(viewModel.isRunning ? "Pause timer" : "Start timer")
+            .accessibilityHint(viewModel.isRunning
+                ? "Pauses the current focus session"
+                : "Starts the \(viewModel.phaseLabel.lowercased()) timer")
 
             // Skip button
             Button {
@@ -125,6 +156,8 @@ struct TimerView: View {
                     )
             }
             .foregroundStyle(.secondary)
+            .accessibilityLabel("Skip to next phase")
+            .accessibilityHint("Ends the current phase and moves to the next one")
         }
     }
 
@@ -154,6 +187,14 @@ struct TimerView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(.ultraThinMaterial)
         )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(summaryAccessibilityLabel)
+    }
+
+    private var summaryAccessibilityLabel: String {
+        let focusMinutes = viewModel.totalFocusToday / 60
+        let streakText = viewModel.currentStreak == 1 ? "1 day streak" : "\(viewModel.currentStreak) day streak"
+        return "\(focusMinutes) minutes focused today, \(viewModel.sessionsToday) sessions completed, \(streakText)"
     }
 
     private func summaryItem(value: String, unit: String, label: String) -> some View {
