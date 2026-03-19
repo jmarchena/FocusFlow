@@ -3,6 +3,9 @@ import SwiftData
 import Observation
 
 /// Manages timer state, countdown logic, and session persistence.
+/// @MainActor ensures all mutations happen on the main thread, which is required
+/// by @Observable and eliminates Swift 6 concurrency warnings throughout.
+@MainActor
 @Observable
 final class TimerViewModel {
     // MARK: - Timer State
@@ -58,10 +61,8 @@ final class TimerViewModel {
 
     func setModelContext(_ context: ModelContext) {
         self.modelContext = context
-        Task { @MainActor in
-            loadTodayStats()
-            calculateStreak()
-        }
+        loadTodayStats()
+        calculateStreak()
     }
 
     // MARK: - Timer Controls
@@ -106,14 +107,16 @@ final class TimerViewModel {
 
     private func startCountdown() {
         timer?.invalidate()
+        // The Timer closure is nonisolated, so we hop back to MainActor explicitly.
+        // Using `[weak self]` prevents a retain cycle; the Task wrapper is the only
+        // safe way to call a @MainActor method from a @Sendable closure.
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
                 self?.tick()
             }
         }
     }
 
-    @MainActor
     private func tick() {
         guard isRunning else { return }
 
@@ -126,7 +129,6 @@ final class TimerViewModel {
         }
     }
 
-    @MainActor
     private func phaseCompleted() {
         pause()
 
@@ -138,7 +140,6 @@ final class TimerViewModel {
         advancePhase(sessionCompleted: true)
     }
 
-    @MainActor
     private func advancePhase(sessionCompleted: Bool) {
         switch currentPhase {
         case .focus:
@@ -156,7 +157,6 @@ final class TimerViewModel {
         sessionStartDate = nil
     }
 
-    @MainActor
     private func saveFocusSession(completed: Bool) {
         guard let context = modelContext else { return }
         let start = sessionStartDate ?? Date()
@@ -179,7 +179,6 @@ final class TimerViewModel {
         calculateStreak()
     }
 
-    @MainActor
     private func loadTodayStats() {
         guard let context = modelContext else { return }
         let calendar = Calendar.current
@@ -195,7 +194,6 @@ final class TimerViewModel {
         }
     }
 
-    @MainActor
     private func updateDailyStats(additionalSeconds: Int) {
         guard let context = modelContext else { return }
 
@@ -225,7 +223,6 @@ final class TimerViewModel {
         try? context.save()
     }
 
-    @MainActor
     private func calculateStreak() {
         guard let context = modelContext else { return }
 
