@@ -1,5 +1,13 @@
 # FocusFlow
 
+![Swift](https://img.shields.io/badge/Swift-6.0-F05138?logo=swift&logoColor=white)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-native-0071E3?logo=swift&logoColor=white)
+![SwiftData](https://img.shields.io/badge/SwiftData-persistence-30D158)
+![Platform](https://img.shields.io/badge/platform-iOS%2017%2B-000000?logo=apple&logoColor=white)
+![Architecture](https://img.shields.io/badge/architecture-MVVM-8E44AD)
+![Concurrency](https://img.shields.io/badge/Swift%20Concurrency-%40MainActor-E67E22)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+
 A minimalist deep work timer and productivity tracker for iOS, built with SwiftUI and SwiftData.
 
 ## Why FocusFlow?
