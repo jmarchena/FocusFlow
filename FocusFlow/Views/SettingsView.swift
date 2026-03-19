@@ -54,6 +54,10 @@ struct SettingsView: View {
                     }
                 }
                 .foregroundStyle(.primary)
+                .accessibilityLabel(preset.name)
+                .accessibilityValue("\(preset.config.focusDurationMinutes) minute focus, \(preset.config.shortBreakMinutes) minute break")
+                .accessibilityHint(timerVM.configuration == preset.config ? "Currently selected" : "Double tap to select this preset")
+                .accessibilityAddTraits(timerVM.configuration == preset.config ? .isSelected : [])
             }
         }
     }
@@ -67,6 +71,9 @@ struct SettingsView: View {
                     .font(.subheadline)
                 Slider(value: $customFocus, in: 5...90, step: 5)
                     .tint(.orange)
+                    .accessibilityLabel("Focus duration")
+                    .accessibilityValue("\(Int(customFocus)) minutes")
+                    .accessibilityHint("Swipe up or down to adjust in 5 minute increments")
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -74,6 +81,9 @@ struct SettingsView: View {
                     .font(.subheadline)
                 Slider(value: $customShortBreak, in: 1...30, step: 1)
                     .tint(.green)
+                    .accessibilityLabel("Short break duration")
+                    .accessibilityValue("\(Int(customShortBreak)) minutes")
+                    .accessibilityHint("Swipe up or down to adjust in 1 minute increments")
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -81,6 +91,9 @@ struct SettingsView: View {
                     .font(.subheadline)
                 Slider(value: $customLongBreak, in: 5...60, step: 5)
                     .tint(.blue)
+                    .accessibilityLabel("Long break duration")
+                    .accessibilityValue("\(Int(customLongBreak)) minutes")
+                    .accessibilityHint("Swipe up or down to adjust in 5 minute increments")
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -88,6 +101,9 @@ struct SettingsView: View {
                     .font(.subheadline)
                 Slider(value: $customSessions, in: 2...8, step: 1)
                     .tint(.purple)
+                    .accessibilityLabel("Sessions before long break")
+                    .accessibilityValue("\(Int(customSessions)) sessions")
+                    .accessibilityHint("Swipe up or down to adjust")
             }
 
             Button("Apply Custom Settings") {
@@ -101,6 +117,8 @@ struct SettingsView: View {
             }
             .frame(maxWidth: .infinity)
             .foregroundStyle(.orange)
+            .accessibilityLabel("Apply custom settings")
+            .accessibilityHint("Applies \(Int(customFocus)) minute focus, \(Int(customShortBreak)) minute short break, \(Int(customLongBreak)) minute long break")
         }
     }
 
