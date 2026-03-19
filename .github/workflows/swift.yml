@@ -16,12 +16,19 @@ jobs:
       - name: Select Xcode 26.3
         run: sudo xcode-select -s /Applications/Xcode_26.3.app
 
+      - name: Boot simulator
+        run: |
+          UDID=$(xcrun simctl create "CI-iPhone" "iPhone 17 Pro" "com.apple.CoreSimulator.SimRuntime.iOS-26-2")
+          xcrun simctl boot "$UDID"
+          echo "SIMULATOR_UDID=$UDID" >> $GITHUB_ENV
+          xcrun simctl bootstatus "$UDID" -b
+
       - name: Build
         run: |
           xcodebuild build \
             -project FocusFlow.xcodeproj \
             -scheme FocusFlow \
-            -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' \
+            -destination "id=$SIMULATOR_UDID" \
             CODE_SIGNING_ALLOWED=NO
 
       - name: Test
@@ -29,5 +36,5 @@ jobs:
           xcodebuild test \
             -project FocusFlow.xcodeproj \
             -scheme FocusFlow \
-            -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.2' \
+            -destination "id=$SIMULATOR_UDID" \
             CODE_SIGNING_ALLOWED=NO
