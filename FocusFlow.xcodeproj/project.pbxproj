@@ -20,7 +20,23 @@
 		A1B2C3D4E5F6A7B8C9D0E3F2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E3F3; };
 		A1B2C3D4E5F6A7B8C9D0E3F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E3F5; };
 		A1B2C3D4E5F6A7B8C9D0E3F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F6A7B8C9D0E3F7; };
+		/* Test build files */
+		TB000001000000000000000001 /* TimerConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TB000001000000000000000002; };
+		TB000001000000000000000003 /* TimerPhaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TB000001000000000000000004; };
+		TB000001000000000000000005 /* FocusSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TB000001000000000000000006; };
+		TB000001000000000000000007 /* DailyStatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TB000001000000000000000008; };
+		TB000001000000000000000009 /* TimerViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = TB000001000000000000000010; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		TB000001000000000000000011 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1B2C3D4E5F6A7B8C9D0F3FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1B2C3D4E5F6A7B8C9D0EEFF;
+			remoteInfo = FocusFlow;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A1B2C3D4E5F6A7B8C9D0E0F1 /* FocusFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,10 +54,24 @@
 		A1B2C3D4E5F6A7B8C9D0E3F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A7B8C9D0E3F7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1B2C3D4E5F6A7B8C9D0E4F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		/* Test file references */
+		TB000001000000000000000000 /* FocusFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FocusFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		TB000001000000000000000002 /* TimerConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerConfigurationTests.swift; sourceTree = "<group>"; };
+		TB000001000000000000000004 /* TimerPhaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPhaseTests.swift; sourceTree = "<group>"; };
+		TB000001000000000000000006 /* FocusSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSessionTests.swift; sourceTree = "<group>"; };
+		TB000001000000000000000008 /* DailyStatsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStatsTests.swift; sourceTree = "<group>"; };
+		TB000001000000000000000010 /* TimerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1B2C3D4E5F6A7B8C9D0E5F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		TB000001000000000000000020 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -116,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F6A7B8C9D0E0F1 /* FocusFlow.app */,
+				TB000001000000000000000000 /* FocusFlowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,8 +155,21 @@
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F6A7B8C9D0E6F1 /* FocusFlow */,
+				TB000001000000000000000030 /* FocusFlowTests */,
 				A1B2C3D4E5F6A7B8C9D0ECFF /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		TB000001000000000000000030 /* FocusFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				TB000001000000000000000002 /* TimerConfigurationTests.swift */,
+				TB000001000000000000000004 /* TimerPhaseTests.swift */,
+				TB000001000000000000000006 /* FocusSessionTests.swift */,
+				TB000001000000000000000008 /* DailyStatsTests.swift */,
+				TB000001000000000000000010 /* TimerViewModelTests.swift */,
+			);
+			path = FocusFlowTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +192,23 @@
 			productReference = A1B2C3D4E5F6A7B8C9D0E0F1 /* FocusFlow.app */;
 			productType = "com.apple.product-type.application";
 		};
+		TB000001000000000000000040 /* FocusFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = TB000001000000000000000050 /* Build configuration list for PBXNativeTarget "FocusFlowTests" */;
+			buildPhases = (
+				TB000001000000000000000060 /* Sources */,
+				TB000001000000000000000020 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				TB000001000000000000000070 /* PBXTargetDependency */,
+			);
+			name = FocusFlowTests;
+			productName = FocusFlowTests;
+			productReference = TB000001000000000000000000 /* FocusFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,6 +221,10 @@
 				TargetAttributes = {
 					A1B2C3D4E5F6A7B8C9D0EEFF = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					TB000001000000000000000040 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = A1B2C3D4E5F6A7B8C9D0EEFF;
 					};
 				};
 			};
@@ -177,6 +242,7 @@
 			projectRoot = "";
 			targets = (
 				A1B2C3D4E5F6A7B8C9D0EEFF /* FocusFlow */,
+				TB000001000000000000000040 /* FocusFlowTests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,7 +278,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		TB000001000000000000000060 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				TB000001000000000000000001 /* TimerConfigurationTests.swift in Sources */,
+				TB000001000000000000000003 /* TimerPhaseTests.swift in Sources */,
+				TB000001000000000000000005 /* FocusSessionTests.swift in Sources */,
+				TB000001000000000000000007 /* DailyStatsTests.swift in Sources */,
+				TB000001000000000000000009 /* TimerViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		TB000001000000000000000070 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1B2C3D4E5F6A7B8C9D0EEFF /* FocusFlow */;
+			targetProxy = TB000001000000000000000011 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A1B2C3D4E5F6A7B8C9D0F5FF /* Debug */ = {
@@ -389,6 +475,46 @@
 			};
 			name = Release;
 		};
+		TB000001000000000000000080 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusflow.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FocusFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FocusFlow";
+			};
+			name = Debug;
+		};
+		TB000001000000000000000090 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusflow.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FocusFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FocusFlow";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -406,6 +532,15 @@
 			buildConfigurations = (
 				A1B2C3D4E5F6A7B8C9D0F7FF /* Debug */,
 				A1B2C3D4E5F6A7B8C9D0F8FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		TB000001000000000000000050 /* Build configuration list for PBXNativeTarget "FocusFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				TB000001000000000000000080 /* Debug */,
+				TB000001000000000000000090 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
